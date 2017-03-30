@@ -1,0 +1,13 @@
+﻿http://blog.csdn.net/liaojiafan/article/details/4879178
+https://msdn.microsoft.com/en-us/data/hh859576.aspx
+
+LeaveStock  /* 出库单表 */  
+
+规格：
+颜色 尺寸、型号
+
+计量单位
+功率 、 转速、电压等
+
+考虑：
+是否剔除明细表 自身ID 例如：退库单表有自身ID，而退库单明细表 关联外键 退库单ID 又有自己的ID

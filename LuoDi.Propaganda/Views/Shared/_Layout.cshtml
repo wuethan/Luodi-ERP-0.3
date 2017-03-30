@@ -1,0 +1,478 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css"
+        rel="stylesheet" />
+    <style type="text/css">
+        *, :after, :before
+        {
+            box-sizing: border-box;
+        }
+        body
+        {
+            font-size: 14px;
+            line-height: 1.42857;
+            color: #333;
+            background-color: rgb(249, 245, 241);
+            padding: 0;
+            margin: 0;
+        }
+        .container-fluid
+        {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .container-fluid .nav-header
+        {
+            border: none;
+            z-index: 1000;
+            position: fixed !important;
+            top: 10%;
+            left: 3%;
+            display: block;
+            padding: 0;
+            width: 13.6666666666667%;
+            font-size: .95em;
+            font-family: 'Open Sans' ,Raleway, 'Microsoft YaHei' ,Arial,SimSun,serif;
+            font-weight: normal;
+            font-size: 12px;
+        }
+        .container-fluid .nav-header .logo
+        {
+            width: 85%;
+            display: block;
+            margin-bottom: 20%;
+        }
+        .container-fluid .nav-header .logo img
+        {
+            width: 100%;
+            height: auto;
+        }
+        .container-fluid .line
+        {
+            transition: height .5s;
+            position: absolute;
+            top: 10%;
+            border-left: 1px solid #ff32a4;
+        }
+        
+        .container-fluid .line .dot
+        {
+            position: absolute;
+            bottom: 0;
+            vertical-align: bottom;
+            margin: auto auto -2px -3.5px;
+            color: #E4007F;
+            width: 6px;
+            height: 6px;
+            border: 1px solid #E4007F;
+            border-radius: 6px;
+            background: #E4007F;
+        }
+        
+        
+        
+        .container-fluid .nav-header .nav-list
+        {
+            margin-left: 1px;
+        }
+        .container-fluid .nav-header .nav-list li
+        {
+            padding-left: 20px;
+            margin: 0;
+            padding-top: 6px;
+        }
+        
+        .container-fluid .nav-header .nav-list li a
+        {
+            padding: 4px;
+            background: 0 0 !important;
+        }
+        
+        .container-fluid .nav-header .nav-list a
+        {
+            color: RGBA(89,87,87,1);
+        }
+        
+        .container-fluid .nav-header .nav-list .active a, .container-fluid .nav-header .nav-list .active a:hover, .container-fluid .nav-header .nav-list .active a:focus
+        {
+            color: #E4007F;
+            text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+            background-color: #fff;
+        }
+        /*_______________________*/
+        
+        .right-page .title
+        {
+            float: right;
+            margin-right: 10%;
+            margin-top: 20%;
+            font-size: 1.4em;
+            color: #E4007F;
+            font-weight: 700;
+        }
+        
+        
+        .right-page .next-line
+        {
+            float: right;
+            padding-left: .8em;
+        }
+        
+        .right-page .description
+        {
+            float: right;
+            font-size: 1.2em;
+            margin-right: 4%;
+            margin-top: 20.05%;
+            color: #E4007F;
+        }
+        
+        /*___________________*/
+        
+        .footer
+        {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 25px;
+            line-height: 25px;
+            padding: 0;
+            font-size: .8em;
+            background: #ededed;
+            border: none;
+            color: #636363;
+        }
+        .footer p
+        {
+            width: 100%;
+        }
+        .center
+        {
+            text-align: center;
+            vertical-align: center;
+        }
+        .footer p a
+        {
+            display: inline-block;
+        }
+        
+        
+        
+        
+        /*____Moblie menu style____*/
+        
+        div.burger
+        {
+            height: 180px;
+            width: 180px;
+            position: fixed;
+            left: -90px;
+            top: -90px;
+            cursor: pointer;
+            z-index: 99;
+            display: none;
+            background: #DF238A;
+            border-radius: 50%;
+        }
+        div.x, div.y, div.z
+        {
+            position: absolute;
+            margin: auto;
+            top: 50px;
+            bottom: 0px;
+            left: 110px;
+            background: #fff;
+            border-radius: 2px;
+            -webkit-transition: all 200ms ease-out;
+            -moz-transition: all 200ms ease-out;
+            -ms-transition: all 200ms ease-out;
+            -o-transition: all 200ms ease-out;
+            transition: all 200ms ease-out;
+        }
+        div.x, div.y, div.z
+        {
+            height: 3px;
+            width: 26px;
+        }
+        div.y
+        {
+            top: 68px;
+        }
+        div.z
+        {
+            top: 87px;
+        }
+        div.collapse
+        {
+            top: 68px;
+            background: #fff;
+            -webkit-transition: all 70ms ease-out;
+            -moz-transition: all 70ms ease-out;
+            -ms-transition: all 70ms ease-out;
+            -o-transition: all 70ms ease-out;
+            transition: all 70ms ease-out;
+        }
+        
+        
+        div.rotate30
+        {
+            -ms-transform: rotate(30deg);
+            -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+            -webkit-transition: all 50ms ease-out;
+            -moz-transition: all 50ms ease-out;
+            -ms-transition: all 50ms ease-out;
+            -o-transition: all 50ms ease-out;
+            transition: all 50ms ease-out;
+        }
+        div.rotate150
+        {
+            -ms-transform: rotate(150deg);
+            -webkit-transform: rotate(150deg);
+            transform: rotate(150deg);
+            -webkit-transition: all 50ms ease-out;
+            -moz-transition: all 50ms ease-out;
+            -ms-transition: all 50ms ease-out;
+            -o-transition: all 50ms ease-out;
+            transition: all 50ms ease-out;
+        }
+        
+        div.rotate45
+        {
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            -webkit-transition: all 100ms ease-out;
+            -moz-transition: all 100ms ease-out;
+            -ms-transition: all 100ms ease-out;
+            -o-transition: all 100ms ease-out;
+            transition: all 100ms ease-out;
+        }
+        div.rotate135
+        {
+            -ms-transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+            -webkit-transition: all 100ms ease-out;
+            -moz-transition: all 100ms ease-out;
+            -ms-transition: all 100ms ease-out;
+            -o-transition: all 100ms ease-out;
+            transition: all 100ms ease-out;
+        }
+        
+        div.navbar
+        {
+            height: 73px;
+            background: #385e97;
+        }
+        
+        div.circle
+        {
+            border-radius: 50%;
+            height: 170px;
+            width: 170px;
+            position: fixed;
+            left: -85px;
+            top: -85px;
+            background: #DF238A;
+            z-index: 99;
+            opacity: 1;
+            display: none;
+            -webkit-transition: all 300ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -moz-transition: all 300ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -ms-transition: all 300ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -o-transition: all 300ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            transition: all 300ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+        }
+        div.circle.expand
+        {
+            width: 1200px;
+            height: 1200px;
+            top: -560px;
+            left: -565px;
+            z-index: 99;
+            -webkit-transition: all 400ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -moz-transition: all 400ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -ms-transition: all 400ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            -o-transition: all 400ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+            transition: all 400ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
+        }
+        div.menu
+        {
+            width: 320px;
+            position: fixed;
+            top: 140px;
+            left: 0px;
+            z-index: 99;
+        }
+        div.menu ul li
+        {
+            list-style: none;
+            text-align: center;
+            line-height: 50px;
+            display: none;
+        }
+        div.menu ul li a
+        {
+            color: #fff;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-size: 21px;
+        }
+        
+        div.menu ul li.animate
+        {
+            display: block;
+        }
+        
+        /**********************************/
+    </style>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery/1.11.0/jquery.min.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            windowSizeAuto();
+        });
+        $(window).resize(function () {
+            windowSizeAuto();
+        });
+
+        function windowSizeAuto() {
+            if ($(window).width() < 935) {
+                $(".nav-header").hide();
+                $(".burger,.circle").show();
+
+                //Home
+                //$(".span2").css("min-height", "0px");
+
+                //Customer
+                $(".thumbnails li.span4").css("width", "50%").css("float", "left").css("margin-bottom", 0);
+                $(".thumbnails").css("padding", 0);
+
+                //Portfolios
+                $("#tiles li").css("width", "47%").css("padding-top", 0).css("padding-bottom", "10px");
+                $(".showcase-display-board .name").css("padding-top", "140px");
+                $(".showcase-display-board .description").css("width", "96%");
+            }
+            else {
+                $(".nav-header").show();
+                $(".burger,.circle").hide();
+
+                //Home
+                //$(".span2").css("min-height", "30px");
+
+                //Customer
+                $(".thumbnails .span4").css("width", "31.491712707182323%").css("margin-bottom", 20);
+                $(".thumbnails").css("padding-top", "4%").css("padding-left", "5%").css("padding-right", "5%");
+
+                //Prtfolios
+                $("#tiles li").css("width", "30%").css("padding-top", "40px");
+                $(".showcase-display-board .name").css("padding-top", "0px");
+                $(".showcase-display-board .description").css("width", "60%");
+            }
+        }
+    </script>
+    @RenderSection("head", false)
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="circle">
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="/Home">观点</a></li>
+                <li><a href="/Portfolios">案例</a></li>
+                <li><a href="/Customer">客户</a></li>
+                <li><a href="/Home/About">关于我们</a></li>
+                <li><a href="">联系我们</a></li>
+            </ul>
+        </div>
+        <div class="burger">
+            <div class="x">
+            </div>
+            <div class="y">
+            </div>
+            <div class="z">
+            </div>
+        </div>
+        <script>
+            if ('ontouchstart' in window) {
+                var click = 'touchstart';
+            } else {
+                var click = 'click';
+            }
+            $('div.burger').on(click, function () {
+                if (!$(this).hasClass('open')) {
+                    openMenu();
+                } else {
+                    closeMenu();
+                }
+            });
+            $('div.menu ul li a').on(click, function (e) {
+                //e.preventDefault();
+                //closeMenu();
+            });
+            function openMenu() {
+                $('div.circle').addClass('expand');
+                $('div.burger').addClass('open');
+                $('div.x, div.y, div.z').addClass('collapse');
+                $('.menu li').addClass('animate');
+                setTimeout(function () {
+                    $('div.y').hide();
+                    $('div.x').addClass('rotate30');
+                    $('div.z').addClass('rotate150');
+                }, 70);
+                setTimeout(function () {
+                    $('div.x').addClass('rotate45');
+                    $('div.z').addClass('rotate135');
+                }, 120);
+            }
+            function closeMenu() {
+                $('div.burger').removeClass('open');
+                $('div.x').removeClass('rotate45').addClass('rotate30');
+                $('div.z').removeClass('rotate135').addClass('rotate150');
+                $('div.circle').removeClass('expand');
+                $('.menu li').removeClass('animate');
+                setTimeout(function () {
+                    $('div.x').removeClass('rotate30');
+                    $('div.z').removeClass('rotate150');
+                }, 50);
+                setTimeout(function () {
+                    $('div.y').show();
+                    $('div.x, div.y, div.z').removeClass('collapse');
+                }, 70);
+            }
+        </script>
+        <div class="nav-header">
+            <div class="logo">
+                <img src="@Url.Content("~/Images/Homelogo/logo2.png")" /></div>
+            <div class="line" style="height: 95px;">
+                <div class="dot">
+                </div>
+            </div>
+            <ul class="nav nav-list">
+                <li class="active"><a href="/">观点</a> </li>
+                <li><a href="/Portfolios">案例</a> </li>
+                <li><a href="/Customer">客户</a> </li>
+                <li><a href="/Home/About">关于我们</a> </li>
+                <li><a href="#">联系方式</a> </li>
+            </ul>
+        </div>
+        <!--  内容  -->
+        @RenderBody()
+    </div>
+    <div class="footer-container">
+        <div class="footer">
+            <p class="center">
+                Copyright © 2014-2015 XXX.XX 上海XXXX网络科技有限公司 ｜ 沪ICP备 14052952号 <a target="_blank" href="#">
+                    <img src="@Url.Content("~/Images/gongshang-icon.png")" border="0" alt="" />
+                </a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

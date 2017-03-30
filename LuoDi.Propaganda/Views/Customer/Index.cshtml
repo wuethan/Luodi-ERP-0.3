@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@section head{
+    <style type="text/css">
+        .customer
+        {
+            margin: 0;
+            display: block;
+            float: left;
+            width: 33%;
+            border-bottom: 1px solid RGBA(230,230,230,1);
+            border-right: 1px solid RGBA(230,230,230,1);
+            padding: 0;
+        }
+        .customer:nth-child(3n)
+        {
+            border-right: none;
+            border-bottom: 1px solid RGBA(230,230,230,1);
+        }
+        .customer .flipper-container .logo
+        {
+            text-align: center;
+            display: block;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+        }
+        .customer .flipper-container .logo img
+        {
+            width: 100%;
+            height: auto;
+        }
+        .customer .flipper-container .details
+        {
+            background-color: #fff;
+            text-align: center;
+            position: absolute;
+            color: #000;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .customer .flipper-container .details .details-container
+        {
+            display: block;
+            position: absolute;
+            bottom: 15%;
+            padding-left: 5%;
+            text-align: left;
+        }
+        .customer .flipper-container .details .details-container .name
+        {
+            font-size: 1.6em;
+        }
+        .customer .flipper-container .details .details-container span
+        {
+            float: left;
+            width: 100%;
+            color: RGBA(61,61,61,1);
+            padding-top: 2%;
+        }
+        .customer .flipper-container .details .details-container .description
+        {
+            font-size: 1em;
+        }
+        .customer .flipper-container .details .details-container span
+        {
+            float: left;
+            width: 100%;
+            color: RGBA(61,61,61,1);
+            padding-top: 2%;
+        }
+        
+        
+        
+        /*******************************************************/
+        
+        .thumbnails
+        {
+            padding-top: 4%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+    </style>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.line').height($('.line').height() + 70);
+    });
+
+
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+            <div class="span2">
+            </div>
+            <div class="span10 right-page">
+                <div class="row-fluid" style="height: 100%; display: block;">
+                    <ul class="thumbnails">
+                        <li class="span4"><a href="#" class="thumbnail">
+                            <img  alt="260x180" src="@Url.Content("~/Images/Customer/1.png")"
+                                style="width: 100%; height: 100%;">
+                        </a></li>
+                        <li class="span4"><a href="#" class="thumbnail">
+                            <img alt="260x180" src="@Url.Content("~/Images/Customer/2.png")"
+                                style="width: 100%; height:100% ">
+                        </a></li>
+                        <li class="span4"><a href="#" class="thumbnail">
+                            <img alt="260x180" src="@Url.Content("~/Images/Customer/3.png")"
+                                style="width: 100%; height:100%">
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

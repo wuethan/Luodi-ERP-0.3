@@ -1,0 +1,363 @@
+﻿@{
+    ViewBag.Title = "案例";
+}
+@section head{
+    <style type="text/css">
+        /* anli ............................................*/
+        
+        /**
+         * Grid container
+         */
+        
+        #tiles
+        {
+            list-style-type: none;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+        /**
+         * Grid items
+         */
+        
+        #tiles li
+        {
+            width: 29.1%;
+            margin-left: 3%;
+            padding-top: 40px;
+            float: left;
+        }
+        #tiles li img
+        {
+            max-width: 100%;
+        }
+        /**
+ * Grid item text
+ */#tiles li p
+        {
+            color: #fff;
+            font-size: 13px;
+            line-height: 20px;
+            text-align: left;
+            font-weight: 200;
+            background: rgba(170,170,170,.92);
+            margin: 0;
+            padding: 5px;
+        }
+        #tiles li p span
+        {
+            width: 100%;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-imagesloaded/3.0.4/jquery.imagesloaded.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Masonry/3.3.2/masonry.pkgd.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/infinitescroll/2.0/jquery.infinitescroll.min.js")"></script>
+   <!-- <script type="text/javascript" src="@Url.Content("~/Scripts/iscroll/5.1.2/iscroll.js")"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.line').height($('.line').height() + 35);
+        });
+
+    </script>
+}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+            <div class="span2">
+            </div>
+            <div class="span10 right-page">
+                <button class="append-button">
+                    Append new items</button>
+                <div id="anliImgList">
+                    <ul id="tiles" class="grid">
+                    </ul>
+                    <div id="navigation">
+                        <a href="page.htm?page=1"></a>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    docReady(function () {
+                        var grid = document.querySelector('.grid');
+                        var msnry = new Masonry(grid, {
+                            itemSelector: '.grid-item',
+                            percentPosition: true
+                        });
+
+                        var appendButton = document.querySelector('.append-button');
+                        eventie.bind(appendButton, 'click', function () {
+
+                            // create new item elements
+                            var elems = [];
+                            var fragment = document.createDocumentFragment();
+                            for (var i = 1; i < 10; i++) {
+                                var elem = getItemElement(i);
+                                fragment.appendChild(elem);
+                                elems.push(elem);
+                            }
+
+                            imagesLoaded(elems, function () {
+                                // append elements to container
+                                grid.appendChild(fragment);
+                                // add and lay out newly appended elements
+                                msnry.appended(elems);
+                                msnry.layout();
+
+                            });
+                        });
+                    });
+
+                    function getItemElement(i) {
+                        var elem = document.createElement('li');
+                        var elemImg = document.createElement('img');
+                        var elemA = document.createElement('a');
+
+
+                        elemImg.setAttribute('src', '/Images/anli/' + i + '.jpg');
+
+                        elemA.setAttribute("href", 'javascript:ShowPup();');
+                        elemA.appendChild(elemImg);
+
+                        elem.className = 'grid-item';
+                        elem.appendChild(elemA);
+
+                        var elemP = document.createElement('p');
+                        var elemTitle = document.createElement('span');
+
+                        elemTitle.innerHTML = "TestTitle";
+
+                        var elemContent = document.createElement('span');
+
+                        elemContent.innerHTML = "TestContent";
+
+                        elemP.appendChild(elemTitle);
+                        elemP.appendChild(elemContent);
+                        elem.appendChild(elemP);
+
+
+                        if ($(window).width() < 935) {
+                            $(elem).css("width", "47%").css("padding-top", 0).css("padding-bottom", "10px");
+                        } else {
+                            $(elem).css("width", "30%").css("padding-top", "40px");
+                        }
+
+                        return elem;
+                    }
+
+
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------------------- -------->
+<style type="text/css">
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6
+    {
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.1;
+        color: inherit;
+    }
+    .showcase-display-board
+    {
+        position: fixed;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 3000;
+        left: 0;
+        background: rgba(255,255,255,.95);
+        overflow-y: scroll;
+        min-height: 100%;
+        display: none;
+    }
+    .showcase-display-board .left-close-btn
+    {
+        left: 5%;
+    }
+    .showcase-display-board .close
+    {
+        width: 50px;
+        height: 50px;
+        position: fixed;
+        z-index: 3000;
+        top: 50px;
+        opacity: 1;
+    }
+    .showcase-display-board .right-close-btn
+    {
+        right: 5%;
+    }
+    .showcase-display-board .scroll-main-container
+    {
+        transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+        transition-duration: 0ms;
+        transform: translate(0px, 0px) translateZ(0px);
+    }
+    .showcase-display-board .scroll-wrapper
+    {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    .showcase-display-board .scroll-wrapper > div
+    {
+        height: auto;
+        min-height: 100%;
+        position: relative;
+        text-align: center;
+    }
+    .showcase-display-board .name
+    {
+        padding-top: 5%;
+        font-size: 2.3em;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+    .showcase-display-board .description, .showcase-display-board .keywords, .showcase-display-board .name
+    {
+        text-align: center;
+        padding: 20px;
+        color: #000;
+        width: 60%;
+        margin: 0 auto;
+    }
+    .showcase-display-board .keywords
+    {
+        font-size: 1em;
+    }
+    .showcase-display-board .description, .showcase-display-board .keywords, .showcase-display-board .name
+    {
+        text-align: center;
+        padding: 20px;
+        color: #000;
+        width: 60%;
+        margin: 0 auto;
+    }
+    .showcase-display-board .description
+    {
+        font-size: 1em;
+        min-height: 30%;
+        padding-bottom: 320px;
+    }
+    .showcase-display-board .showcase-nav
+    {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: inline-block;
+    }
+    .showcase-display-board .showcase-nav .nav-showcase-item:first-child
+    {
+        border-right: 1px solid rgba(150,150,150,.95);
+    }
+    .showcase-display-board .showcase-nav .nav-showcase-item
+    {
+        width: 50%;
+        padding: 0;
+        height: 300px;
+        float: left;
+        text-align: center;
+        cursor: pointer;
+        background-size: 100% auto;
+    }
+    .showcase-display-board .showcase-nav .nav-showcase-item .gray-background
+    {
+        width: 100%;
+        display: inline-block;
+        height: 100%;
+        background: 0 0/100% auto no-repeat rgba(50,50,50,.7);
+    }
+    .showcase-display-board .showcase-nav .nav-showcase-item .name
+    {
+        position: relative;
+        color: #fff;
+        top: 38%;
+        font-size: 2.8em;
+    }
+    blockquote
+    {
+        padding: 10px 20px;
+        margin: 0 0 20px;
+        font-size: 17.5px;
+        border-left: 5px solid #eee;
+    }
+    
+    /* -------------------------- */
+</style>
+<div class="showcase-display-board">
+    <a title="返回" class="left-close-btn close active" href="/portfolios">
+        <img src="/Images/bt/return-btn.png" alt="返回" /></a><a title="关闭" class="right-close-btn close active"
+            href="/portfolios"><img src="/Images/bt/close-btn.png" alt="关闭" /></a><div class="scroll-wrapper">
+                <div id="wrapper" class="scroll-main-container">
+                    <div id="scroller">
+                        <div class="fluidbox-container name">
+                            摄影元素</div>
+                        <div class="fluidbox-container keywords">
+                            时尚, 魔力</div>
+                        <div class="fluidbox-container description">
+                            <blockquote>
+                                <h3 style="text-align: center;">
+                                    <span style="color: inherit;"><b>&nbsp;World Photography Awards&nbsp;</b></span>
+                                </h3>
+                                <h5 style="text-align: center;">
+                                    <span style="color: inherit;">索尼国际摄影大赛由WPO（World Photography Organisation，世界摄影组织）主办，索尼公司赞助，分为专业组、开放组和青年组三大类，十多个具体类别，获奖作品将在全球范围内巡展。今年的大赛收到来自166个国家的超过14万件投稿作品，日前主办方公布了最终入围作品，获奖作品将于今年三四月间公布。</span><br>
+                                </h5>
+                                <div>
+                                    <p>
+                                        <img src="http://sailfish.io/resources/54617e3d31302d3609250000.jpg"><br />
+                                    </p>
+                                    <p>
+                                        <br />
+                                    </p>
+                                    <p>
+                                        <img src="http://sailfish.io/resources/54617e3d31302d361c1d0000.jpg"><br />
+                                    </p>
+                                    <p>
+                                        <br />
+                                    </p>
+                                    <p>
+                                        <img src="http://sailfish.io/resources/54617e3e31302d3609270000.jpg"><br />
+                                    </p>
+                                    <p>
+                                        <br />
+                                    </p>
+                                    <p>
+                                        <img src="http://sailfish.io/resources/54617e3d31302d3609260000.jpg"><br />
+                                    </p>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<script type="text/javascript">
+    function ShowPup() {
+        /*隐藏外侧滚动条 避免出现两个*/
+        $("body").css("overflow-y", "hidden");
+        $(".showcase-display-board").show();
+
+        /*设置scroll最外侧absolute且居上居下1才可拖动
+        $("#wrapper").css("position", "absolute").css("top", 1).css("bottom", 1);
+        var myScroll = new IScroll('#wrapper', { scrollX: true, freeScroll: true });
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        */
+    
+    }
+
+
+    $(".showcase-display-board .close").click(function (event) {
+        /*
+        $(".showcase-display-board .name,.showcase-display-board .keywords,.showcase-display-board .description").html("");
+        $(".needsclick .previous-btn,.needsclick .next-btn").css("background", "none");
+        */
+
+        $(".showcase-display-board").hide();
+        $("body").css("overflow-y", "auto");
+
+        event.preventDefault();
+    });
+</script>
